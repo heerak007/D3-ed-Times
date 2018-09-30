@@ -116,19 +116,21 @@ function YrenderText(textGroup, newYScale, chosenYAxis) {
 }
 
 // -----------------------------------------------------------------------------
-
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
-    var xlabel = `${chosenXAxis}: `;
-    var ylabel = `${chosenYAxis}: `;
+    var xlabel = capitalize(chosenXAxis);
+    var ylabel = capitalize(chosenYAxis);
     
   
     var toolTip = d3.tip()
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`${d.state}<br>${xlabel} ${d[chosenXAxis]}<br>${ylabel} ${d[chosenYAxis]}`);
+        return (`${capitalize(d.state)}<br>${xlabel}: ${d[chosenXAxis]}<br>${ylabel}: ${d[chosenYAxis]}%`);
       });
   
     circlesGroup.call(toolTip);
@@ -216,7 +218,7 @@ d3.csv("assets/data/stateData.csv", function(err, stateData){
         .attr("id", "poverty")
         .attr("value", "poverty") // value to grab for event listener
         .classed("active",true)
-        .text("Poverty Level");
+        .text("Poverty Level %");
 
         var ageLabel = XlabelsGroup
         .append("text")
@@ -234,7 +236,7 @@ d3.csv("assets/data/stateData.csv", function(err, stateData){
         .attr("id", "income")
         .attr("value", "income") // value to grab for event listener
         .classed("inactive", true)
-        .text("Household Income");
+        .text("Median Household Income");
 
         var healthcareLabel = YlabelsGroup
         .append("text")
@@ -242,7 +244,7 @@ d3.csv("assets/data/stateData.csv", function(err, stateData){
         .attr("id", "healthcare")
         .attr("value", "healthcare") // value to grab for event listener
         .classed("active", true)
-        .text("Lacks Healthcare");
+        .text("Lacks Healthcare %");
 
         var smokesLabel = YlabelsGroup
         .append("text")
