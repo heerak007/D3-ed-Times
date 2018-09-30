@@ -1,4 +1,4 @@
-#D3'ed Times
+# D3'ed Times
 An interactive d3 visualization of healthcare states by state in the USA
 
 ![Newsroom](https://media.giphy.com/media/v2xIous7mnEYg/giphy.gif)
